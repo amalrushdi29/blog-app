@@ -60,14 +60,19 @@ function SinglePost() {
         </p>
 
         {user && user.userId === post.author?._id && (
-          <div className="flex gap-3 mt-8">
-            <button
-              onClick={handleDelete}
-              className="bg-red-400 hover:bg-red-500 text-white font-semibold px-6 py-2 rounded-lg transition">
-              🗑️ Delete Post
-            </button>
-          </div>
-        )}
+        <div className="flex gap-3 mt-8">
+          <button
+            onClick={() => navigate(`/edit/${post._id}`)}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-lg transition">
+            ✏️ Edit Post
+          </button>
+          <button
+            onClick={handleDelete}
+            className="bg-red-400 hover:bg-red-500 text-white font-semibold px-6 py-2 rounded-lg transition">
+            🗑️ Delete Post
+          </button>
+        </div>
+      )}
 
         <button
           onClick={() => navigate('/')}

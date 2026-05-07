@@ -3,6 +3,7 @@ import PostCard from '../components/PostCard'
 
 function Home() {
   const [posts, setPosts] = useState([])
+  const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -13,6 +14,11 @@ function Home() {
         setLoading(false)
       })
   }, [])
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(search.toLowerCase()) ||
+    post.category.toLowerCase().includes(search.toLowerCase())
+  )
 
   if (loading) {
     return (
@@ -28,14 +34,24 @@ function Home() {
         Latest Posts 📰
       </h1>
 
-      {posts.length === 0 ? (
+      <div className="mb-8">
+        <input
+          type="text"
+          placeholder="🔍 Search by title or category..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white shadow-sm"
+        />
+      </div>
+
+      {filteredPosts.length === 0 ? (
         <div className="text-center text-gray-400 mt-10">
-          <p className="text-2xl">📭</p>
-          <p className="text-lg font-medium">No posts yet. Be the first to write one!</p>
+          <p className="text-2xl">🔍</p>
+          <p className="text-lg font-medium">No posts found!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <PostCard key={post._id} post={post} />
           ))}
         </div>

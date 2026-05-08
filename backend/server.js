@@ -14,8 +14,10 @@ app.use(express.json());
 // Routes
 const authRouter = require('./routes/auth');
 const postsRouter = require('./routes/posts');
+const commentsRouter = require('./routes/comments');
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postsRouter);
+app.use('/api/comments', commentsRouter);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

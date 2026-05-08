@@ -71,4 +71,21 @@ router.delete('/:id', verifyToken, async (req, res) => {
   }
 });
 
+// GET posts by username
+router.get('/user/:username', async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const user = await User.findOne({ username: req.params.username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
+    const posts = await Post.find({ author: user._id })
+      .populate('author', 'username')
+      .sort({ createdAt: -1 });
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

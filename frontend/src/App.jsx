@@ -9,6 +9,7 @@ import SinglePost from './pages/SinglePost'
 import EditPost from './pages/EditPost'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/edit/:id" element={<EditPost />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path="/profile/:username" element={<Profile />} />
           </Routes>
         </div>
       </BrowserRouter>

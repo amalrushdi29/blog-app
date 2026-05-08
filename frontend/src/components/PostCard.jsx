@@ -19,9 +19,11 @@ function PostCard({ post }) {
       </p>
 
       <div className="flex justify-between items-center mt-2">
-        <span className="text-sm text-gray-500 font-medium">
-          ✍️ {post.author?.username}
-        </span>
+        <Link
+        to={`/profile/${post.author?.username}`}
+        className="text-sm text-blue-500 font-medium hover:underline">
+        ✍️ {post.author?.username}
+        </Link>
         <Link
           to={`/post/${post._id}`}
           className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">

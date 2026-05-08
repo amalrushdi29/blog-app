@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+
 
 function SinglePost() {
   const [post, setPost] = useState(null)
@@ -52,7 +53,12 @@ function SinglePost() {
         </h1>
 
         <p className="text-sm text-gray-500 mb-6">
-          ✍️ Written by <span className="font-semibold">{post.author?.username}</span>
+          ✍️ Written by{' '}
+          <Link
+            to={`/profile/${post.author?.username}`}
+            className="font-semibold text-blue-500 hover:underline">
+            {post.author?.username}
+          </Link>
         </p>
 
         <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">

@@ -88,4 +88,27 @@ router.get('/user/:username', async (req, res) => {
   }
 });
 
+// PUT like/unlike a post
+router.put('/:id/like', verifyToken, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id)
+    const userId = req.user._id
+
+    if (post.likes.includes(userId)) {
+      // Unlike — remove user ID from likes array
+      post.likes = post.likes.filter(
+        (id) => id.toString() !== userId
+      )
+    } else {
+      // Like — add user ID to likes array
+      post.likes.push(userId)
+    }
+
+    await post.save()
+    res.json({ likes: post.likes.length, liked: post.likes.includes(userId) })
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
 module.exports = router;

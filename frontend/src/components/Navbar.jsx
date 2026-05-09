@@ -11,21 +11,23 @@ function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold text-blue-600">
+    <nav className="bg-gradient-to-r from-blue-600 to-blue-400 shadow-lg px-6 py-4 flex justify-between items-center">
+      <Link to="/" className="text-2xl font-bold text-white tracking-wide">
         📝 BlogApp
       </Link>
 
       <div className="flex items-center gap-4">
         {user ? (
           <>
-            <span className="text-gray-600 font-medium">
+            <Link
+              to={`/profile/${user.username}`}
+              className="text-white font-medium hover:underline">
               👋 {user.username}
-            </span>
+            </Link>
             <Link
               to="/create"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold transition">
-              New Post
+              className="bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg font-semibold transition">
+              ✍️ New Post
             </Link>
             <button
               onClick={handleLogout}
@@ -37,12 +39,12 @@ function Navbar() {
           <>
             <Link
               to="/login"
-              className="text-blue-500 hover:text-blue-600 font-semibold transition">
+              className="text-white hover:underline font-semibold transition">
               Login
             </Link>
             <Link
               to="/register"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold transition">
+              className="bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg font-semibold transition">
               Register
             </Link>
           </>

@@ -22,23 +22,29 @@ function PostCard({ post }) {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-3 hover:shadow-lg transition">
-      <div className="flex justify-between items-center">
-        <span className="text-xs font-semibold text-white bg-blue-500 px-3 py-1 rounded-full">
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+      {/* Card Header */}
+      <div className="bg-gradient-to-r from-blue-500 to-blue-400 p-4 flex justify-between items-center">
+        <span className="text-xs font-semibold text-white bg-white/20 px-3 py-1 rounded-full">
           {post.category}
         </span>
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-blue-100">
           {new Date(post.createdAt).toLocaleDateString()}
         </span>
       </div>
 
-      <h2 className="text-xl font-bold text-gray-800">{post.title}</h2>
+      {/* Card Body */}
+      <div className="p-5 flex flex-col gap-3 flex-1">
+        <h2 className="text-lg font-bold text-gray-800 line-clamp-2">
+          {post.title}
+        </h2>
+        <p className="text-gray-500 text-sm line-clamp-3 flex-1">
+          {post.content}
+        </p>
+      </div>
 
-      <p className="text-gray-600 text-sm line-clamp-3">
-        {post.content}
-      </p>
-
-      <div className="flex justify-between items-center mt-2">
+      {/* Card Footer */}
+      <div className="px-5 pb-5 flex justify-between items-center">
         <Link
           to={`/profile/${post.author?.username}`}
           className="text-sm text-blue-500 font-medium hover:underline">

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import API from '../config'
 
 function CreatePost() {
   const [title, setTitle] = useState('')
@@ -14,7 +15,7 @@ function CreatePost() {
     e.preventDefault()
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch('http://localhost:5000/api/posts', {
+      const res = await fetch(`${API}/api/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

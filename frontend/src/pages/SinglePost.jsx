@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import API from '../config'
 
 function SinglePost() {
   const [post, setPost] = useState(null)
@@ -12,21 +13,22 @@ function SinglePost() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`)
+    fetch(`
+      ${API}/api/posts/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setPost(data)
         setLoading(false)
       })
 
-    fetch(`http://localhost:5000/api/comments/${id}`)
+    fetch(`${API}/api/comments/${id}`)
       .then((res) => res.json())
       .then((data) => setComments(data))
   }, [id])
 
   const handleDelete = async () => {
     const token = localStorage.getItem('token')
-    await fetch(`http://localhost:5000/api/posts/${id}`, {
+    await fetch(`${API}/api/posts/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     })
@@ -36,7 +38,7 @@ function SinglePost() {
   const handleComment = async () => {
     if (!newComment) return
     const token = localStorage.getItem('token')
-    const res = await fetch(`http://localhost:5000/api/comments/${id}`, {
+    const res = await fetch(`${API}/api/comments/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ function SinglePost() {
 
   const handleDeleteComment = async (commentId) => {
     const token = localStorage.getItem('token')
-    await fetch(`http://localhost:5000/api/comments/${commentId}`, {
+    await fetch(`${API}/api/comments/${commentId}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     })

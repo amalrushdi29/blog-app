@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import PostCard from '../components/PostCard'
+import API from '../config'
 
 function Profile() {
   const [posts, setPosts] = useState([])
@@ -8,7 +9,7 @@ function Profile() {
   const { username } = useParams()
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/user/${username}`)
+    fetch(`${API}/api/posts/user/${username}`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data)

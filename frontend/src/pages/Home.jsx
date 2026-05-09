@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
 import PostCard from '../components/PostCard'
+import API from '../config'
 
 function Home() {
   const [posts, setPosts] = useState([])
@@ -10,7 +11,7 @@ function Home() {
   const { user } = useAuth()
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/posts')
+    fetch(`${API}/api/posts`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data)

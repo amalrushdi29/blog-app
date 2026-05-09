@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import API from '../config'
 
 function PostCard({ post }) {
   const { user } = useAuth()
@@ -12,7 +13,7 @@ function PostCard({ post }) {
   const handleLike = async () => {
     if (!user) return
     const token = localStorage.getItem('token')
-    const res = await fetch(`http://localhost:5000/api/posts/${post._id}/like`, {
+    const res = await fetch(`${API}/api/posts/${post._id}/like`, {
       method: 'PUT',
       headers: { 'Authorization': `Bearer ${token}` }
     })
